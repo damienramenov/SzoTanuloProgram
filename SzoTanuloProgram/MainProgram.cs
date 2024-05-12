@@ -7,15 +7,17 @@ namespace SzoTanuloProgram
     {
         static void Main()
         {
-            /*
-            if (!CheckForFiles())
+            if (!ExecutePrecheck())
             {
                 return;
-            }*/
+            }
 
             RunApplication();
         }
 
+        /// <summary>
+        /// Biztos, hogy lehet szebben is hibát kezelni. (+ amúgy van egy .net-es runtime exception handler)
+        /// </summary>
         private static void RunApplication()
         {
             try
@@ -26,7 +28,8 @@ namespace SzoTanuloProgram
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Váratlan hiba történt! {Environment.NewLine} {ex.Message}");
+                MessageBox.Show($"Váratlan hiba történt! {Environment.NewLine} " +
+                                $"{ex.Message}");
             }
 
         }
@@ -35,10 +38,12 @@ namespace SzoTanuloProgram
         ///     true, ha minden rendben
         ///     false, ha nincs minden rendben
         /// </returns>
-        private static bool CheckForFiles()
+        private static bool ExecutePrecheck()
         {
-            //resources
-            //settings
+            //TODO: Ellenőrizzük, hogy minden szükséges fájl megvan-e.
+            //TODO: Létre kell hozni egy settings.file -t, amiben tárolunk különböző adatokat.
+            //TODO: Ellenőrizzük, hogy a settings létezik-e, ha nem, akkor hozzuk létre,
+            //állítsuk be az alap adatokat, hívjuk fel a figyelmet arra, hogy ezeket be lehet állítani. --> Beállítások menüpont? (Van neki hely a főmenüben.)
 
             return true;
         }

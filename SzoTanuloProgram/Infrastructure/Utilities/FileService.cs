@@ -18,16 +18,20 @@ namespace SzoTanuloProgram
         private static readonly string _szojegyzekekFolder = $@"{_resourceFolder}\Szojegyzekek";
 
         public static string GetSzojegyzekFile(SzojegyzekType e, int unit)
-            => GetFilePathSafely(_szojegyzekekFolder, $"{EnumHelper.GetDisplayValue(e)}_{unit}.txt");
+        {
+            var displayName = EnumHelper.GetDisplayValue(e);
+
+            return GetFilePathSafely(_szojegyzekekFolder, $@"{displayName}\{displayName}_{unit}.txt");
+        }
 
         public static string GetImageFile(ImageType e, string nameSpecified)
-            => GetFilePathSafely(_imagesFolder, $"{EnumHelper.GetDisplayValue(e)}/{nameSpecified}.jpg");
+            => GetFilePathSafely(_imagesFolder, $@"{EnumHelper.GetDisplayValue(e)}\{nameSpecified}");
 
         public static string GetRandomLoaderImageFilePath()
         {
-            var filePathsInImagesFolder = Directory.GetFiles($"{_imagesFolder}/Loader/");
+            var filePathsInImagesFolder = Directory.GetFiles($@"{_imagesFolder}\Loader\");
 
-            if (filePathsInImagesFolder == null || filePathsInImagesFolder.Length < 1)
+            if (filePathsInImagesFolder != null && filePathsInImagesFolder.Length > 1)
             {
                 var randomIndex = new Random().Next(0, filePathsInImagesFolder.Length);
 
