@@ -10,9 +10,6 @@ namespace SzoTanuloProgram
     {
         public static GameType SelectedGameType = GameType.None;
 
-        public static string _eztOlvasdBeFeleletvalasztos = "";
-        OpenFileDialog openFile = new OpenFileDialog();
-
         public FoMenu()
         {
             InitializeComponent();

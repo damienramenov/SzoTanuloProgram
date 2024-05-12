@@ -2,79 +2,63 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SzoTanuloProgram
 {
     public partial class Memoriajatek : Form
     {
-        class szavak
-        {
-            public string angol;
-            public string magyar;
+        private bool _hasGameBeenStarted;
+        private int _foundPairsInCurrentSession = 0;
+        private int _createdPairsInAllSession = 1;
+        private Random random = new Random();
 
+        private struct Szopar
+        {
+            public string AngolKifejezes;
+            public string MagyarKifejezes;
+
+            public Szopar(string angol, string magyar)
+            {
+                AngolKifejezes = angol;
+                MagyarKifejezes = magyar;
+            }
         }
 
+        //angol - magyar
+        private List<Szopar> _osszesSzo = new List<Szopar>();
 
-        bool MEHET = false;
-        int gyoztel = 0;
-        int szamlalo = 1;
-        string eztolvasbe = PorgetosEsBeirogatos_Almenu.ValasztottSzojegyzekFilePath;
-        Random random = new Random();
-        List<szavak> osszesSzo = new List<szavak>();
+        private List<int> _letrehozottSzavakIndexei = new List<int>();
+        private List<string> _currentSessionSzoparElemek = new List<string>();
+        private Label firstlyClickedLabel, secondlyClickedLabel;
 
-        static List<int> voltak = new List<int>();
-        static List<string> icoooos = new List<string>();
-        Label elsoKlikk, masodikKlikk;
+        private static readonly Color _greyBackgroundColor = Color.FromArgb(140, 140, 140);
+        private static readonly Color _cyanBackgroundColor = Color.FromArgb(0, 179, 179);
+        private static readonly Color _redBackgroundColor = Color.FromArgb(153, 0, 0);
+        private static readonly Color _darkOrangeBackgroundColor = Color.FromArgb(153, 92, 0);
 
         public Memoriajatek()
         {
-            icoooos.Clear();
             InitializeComponent();
 
-            voltak.Clear();
-
-            osszesSzo.Clear();
-            szamlalo = 1;
-
-            StreamReader sr = new StreamReader(eztolvasbe);
-            while (!sr.EndOfStream)
-            {
-                string[] sor = sr.ReadLine().Split('|');
-                szavak aktualis = new szavak();
-                aktualis.angol = sor[0];
-                aktualis.magyar = sor[1];
-                osszesSzo.Add(aktualis);
-
-
-            }
-
-            label1.Visible = false;
-            label2.Visible = false;
-            label3.Visible = false;
-            label4.Visible = false;
-            label5.Visible = false;
-            label6.Visible = false;
-            label7.Visible = false;
-            label8.Visible = false;
-            label9.Visible = false;
-            label10.Visible = false;
-            label11.Visible = false;
-            label12.Visible = false;
-            label13.Visible = false;
-            label14.Visible = false;
-            label15.Visible = false;
-            label16.Visible = false;
-            label17.Visible = false;
-            label18.Visible = false;
-            label19.Visible = false;
-            label20.Visible = false;
-
-
-
+            ReadSzojegyzek();
+            
+            ModifyLabelVisibility(shouldBeVisible: false);
         }
 
-        private void Memoria_Jatek_Load(object sender, EventArgs e)
+        private void ReadSzojegyzek()
+        {
+            StreamReader sr = new StreamReader(PorgetosEsBeirogatos_Almenu.ValasztottSzojegyzekFilePath);
+            while (!sr.EndOfStream)
+            {
+                var currentLineSplitted = sr.ReadLine().Split('|');
+
+                _osszesSzo.Add(new Szopar(currentLineSplitted[0], currentLineSplitted[1]));
+            }
+        }
+
+        private void Memoriajatek_Load(object sender, EventArgs e)
         {
             int w = Screen.PrimaryScreen.Bounds.Width;
             int h = Screen.PrimaryScreen.Bounds.Height;
@@ -82,240 +66,222 @@ namespace SzoTanuloProgram
             this.Size = new Size(w, h);
         }
 
-
         private void label_Click(object sender, EventArgs e)
         {
-            if (MEHET == true)
+            if (!_hasGameBeenStarted == true || firstlyClickedLabel != null && secondlyClickedLabel != null)
             {
-                if (elsoKlikk != null && masodikKlikk != null)
-                    return;
+                return;
+            }
 
+            var clickedLabel = sender as Label;
+            if (clickedLabel == null)
+            {
+                return;
+            }
 
-                Label clickedLabel = sender as Label;
+            if (IsSameColor(clickedLabel.BackColor, _greyBackgroundColor))
+            {
+                firstlyClickedLabel.BackColor = _darkOrangeBackgroundColor;
+                firstlyClickedLabel = null;
 
-                if (clickedLabel == null)
-                    return;
-                if (clickedLabel.BackColor == Color.FromArgb(140, 140, 140))
-                    return;
+                return;
+            }
 
-                if (elsoKlikk == null)
+            if (firstlyClickedLabel == null)
+            {
+                firstlyClickedLabel = clickedLabel;
+                firstlyClickedLabel.BackColor = _greyBackgroundColor;
+
+                return;
+            }
+
+            secondlyClickedLabel = clickedLabel;
+            secondlyClickedLabel.BackColor = _greyBackgroundColor;
+
+            //ELLENŐRZI A KÉT KLIKKET
+            string firstlyClickedLabelText = firstlyClickedLabel.Text;
+            int firstlyClickedLabelIndex = -10;
+
+            string masik = secondlyClickedLabel.Text;
+            int masikIndex = 0;
+            string angolSzo = "";
+
+            for (int i = 0; i < _osszesSzo.Count; i++)
+            {
+                if (firstlyClickedLabelText == _osszesSzo[i].AngolKifejezes)
                 {
-                    elsoKlikk = clickedLabel;
-                    elsoKlikk.BackColor = Color.FromArgb(140, 140, 140);
-                    return;
+                    firstlyClickedLabelIndex = i;
+                    angolSzo = firstlyClickedLabelText;
                 }
 
-                masodikKlikk = clickedLabel;
-                masodikKlikk.BackColor = Color.FromArgb(140, 140, 140);
-
-                //ELLENŐRZI A KÉT KLIKKET
-                string egyik = elsoKlikk.Text;
-                int egyikIndex = -10;
-                string masik = masodikKlikk.Text;
-                int masikIndex = 0;
-                string angolSzo = "";
-
-                for (int i = 0; i < osszesSzo.Count; i++)
+                if (firstlyClickedLabelText == _osszesSzo[i].MagyarKifejezes)
                 {
-                    if (egyik == osszesSzo[i].angol)
-                    {
-                        egyikIndex = i;
-                        angolSzo = osszesSzo[i].angol;
-                    }
-                    if (egyik == osszesSzo[i].magyar)
-                    {
-                        egyikIndex = i;
-                    }
-                    if (masik == osszesSzo[i].angol)
-                    {
-                        masikIndex = i;
-                        angolSzo = osszesSzo[i].angol;
-                    }
-                    if (masik == osszesSzo[i].magyar)
-                    {
-                        masikIndex = i;
-                    }
-
-
-                }
-                if (egyikIndex == masikIndex)
-                {
-                    gyoztel++;
-                    if (gyoztel < 10)
-                    {
-                        SpeechUtility.Speak(angolSzo);
-
-                        if (angolSzo != null)
-                        {
-                            MessageBox.Show(angolSzo);
-                        }
-                        System.Threading.Thread.Sleep(20);
-
-                    }
-
-                    elsoKlikk.BackColor = Color.FromArgb(0, 179, 179);
-                    masodikKlikk.BackColor = Color.FromArgb(0, 179, 179);
-
-
-                    elsoKlikk.Visible = false;
-                    masodikKlikk.Visible = false;
-
-                    System.Threading.Thread.Sleep(40);
-
-                    elsoKlikk = null;
-                    masodikKlikk = null;
-
-
-
-
-
-
-                }
-                else
-                {
-
-                    elsoKlikk.BackColor = Color.FromArgb(153, 0, 0);
-                    masodikKlikk.BackColor = Color.FromArgb(153, 0, 0);
-
-                    System.Threading.Thread.Sleep(25);
-                    timer1.Start();
-                }
-                /* ....................................... */
-
-                //Gyöztes csekk
-                if (gyoztel == 10)
-                {
-                    btnMehet.Visible = true;
-                    btnMenu.Visible = true;
-
-                    string szovegAmitKimondd = angolSzo.Trim();
-
-                    SpeechUtility.Speak(szovegAmitKimondd);
-
-                    if (szovegAmitKimondd != null)
-                    {
-                        MessageBox.Show(szovegAmitKimondd);
-                    }
-                    System.Threading.Thread.Sleep(20);
+                    firstlyClickedLabelIndex = i;
                 }
 
-                if (szamlalo > ((osszesSzo.Count - (osszesSzo.Count % 10)) / 10))
+                if (masik == _osszesSzo[i].AngolKifejezes)
                 {
-                    MessageBox.Show($"Végeztél ezzel a leckével!\nIsmételt szavak száma: {osszesSzo.Count - (osszesSzo.Count % 10)}\nAz OK gombra kattintva visszakerülsz a menübe!");
-                    FoMenu f2 = new FoMenu();
-                    this.Close();
-                    f2.Show();
+                    masikIndex = i;
+                    angolSzo = masik;
                 }
+
+                if (masik == _osszesSzo[i].MagyarKifejezes)
+                {
+                    masikIndex = i;
+                }
+            }
+
+            if (firstlyClickedLabelIndex == masikIndex)
+            {
+                _foundPairsInCurrentSession++;
+
+                SpeechUtility.Speak(angolSzo);
+
+                Thread.Sleep(angolSzo.Length * 3);
+
+                firstlyClickedLabel.Visible = false;
+                firstlyClickedLabel = null;
+
+                secondlyClickedLabel.Visible = false;
+                secondlyClickedLabel = null;
+
+                Thread.Sleep(40);
+
+            }
+            else
+            {
+                firstlyClickedLabel.BackColor = _redBackgroundColor;
+                secondlyClickedLabel.BackColor = _redBackgroundColor;
+
+                Thread.Sleep(50);
+                timer1.Start();
+            }
+            /* ....................................... */
+
+            //Gyöztes csekk
+            if (_foundPairsInCurrentSession == 10)
+            {
+                btnMehet.Text = "Kérem az újabb szópárokat!";
+                btnMehet.Visible = true;
+
+                Thread.Sleep(20);
+            }
+
+            if (_createdPairsInAllSession > ((_osszesSzo.Count - (_osszesSzo.Count % 10)) / 10))
+            {
+                MessageBox.Show($"Végeztél ezzel a leckével!" +
+                    $"\nIsmételt szavak száma: {_osszesSzo.Count - (_osszesSzo.Count % 10)}" +
+                    $"\nAz OK gombra kattintva visszakerülsz a menübe!");
+
+                new FoMenu().Show();
+                Hide();
             }
         }
 
         private void btnMehet_Click(object sender, EventArgs e)
         {
             btnMehet.Visible = false;
-            btnMenu.Visible = false;
 
-            label1.Visible = true;
-            label2.Visible = true;
-            label3.Visible = true;
-            label4.Visible = true;
-            label5.Visible = true;
-            label6.Visible = true;
-            label7.Visible = true;
-            label8.Visible = true;
-            label9.Visible = true;
-            label10.Visible = true;
-            label11.Visible = true;
-            label12.Visible = true;
-            label13.Visible = true;
-            label14.Visible = true;
-            label15.Visible = true;
-            label16.Visible = true;
-            label17.Visible = true;
-            label18.Visible = true;
-            label19.Visible = true;
-            label20.Visible = true;
+            ModifyLabelVisibility(shouldBeVisible: true);
 
-            Label labelL;
-            for (int i = 0; i < tableLayoutPanel1.Controls.Count; i++)
+            foreach (var control in tableLayoutPanel1.Controls)
             {
-                if (tableLayoutPanel1.Controls[i] is Label)
+                var label = control as Label;
+
+                if (label != null)
                 {
-                    labelL = (Label)tableLayoutPanel1.Controls[i];
-                    labelL.BackColor = Color.FromArgb(153, 92, 0);
-                }
-                else
-                {
-                    continue;
+                    label.BackColor = _darkOrangeBackgroundColor;
                 }
             }
-            MEHET = true;
-            gyoztel = 0;
-            icoooos.Clear();
 
-            if (szamlalo <= ((osszesSzo.Count - (osszesSzo.Count % 10)) / 10))
+            _hasGameBeenStarted = true;
+            _foundPairsInCurrentSession = 0;
+            _currentSessionSzoparElemek.Clear();
+
+            if (_createdPairsInAllSession <= ((_osszesSzo.Count - (_osszesSzo.Count % 10)) / 10))
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    int generalj = random.Next(0, osszesSzo.Count);
-                    bool volte = icoooos.Contains(osszesSzo[generalj].angol);
-                    bool volteIndex = voltak.Contains(generalj);
-                    if (volte == false && volteIndex == false)
+                    int randomNumber = random.Next(0, _osszesSzo.Count);
+
+                    bool volte = _currentSessionSzoparElemek.Contains(_osszesSzo[randomNumber].AngolKifejezes);
+                    bool volteIndex = _letrehozottSzavakIndexei.Contains(randomNumber);
+                    if (!volte && !volteIndex)
                     {
-                        voltak.Add(generalj);
-                        icoooos.Add(osszesSzo[generalj].angol);
-                        icoooos.Add(osszesSzo[generalj].magyar);
+                        _letrehozottSzavakIndexei.Add(randomNumber);
+                        _currentSessionSzoparElemek.Add(_osszesSzo[randomNumber].AngolKifejezes);
+                        _currentSessionSzoparElemek.Add(_osszesSzo[randomNumber].MagyarKifejezes);
                     }
                     else
                     {
                         i--;
                     }
                 }
+
                 AssignIconsToSquares();
-                szamlalo++;
+
+                _createdPairsInAllSession++;
             }
         }
 
         private void AssignIconsToSquares()
         {
-            Label label;
-            int randomNumber;
-
             for (int i = 0; i < tableLayoutPanel1.Controls.Count; i++)
             {
-                if (tableLayoutPanel1.Controls[i] is Label)
-                {
-                    label = (Label)tableLayoutPanel1.Controls[i];
-                }
-                else
+                var currentControlAsLabel = tableLayoutPanel1.Controls[i] as Label;
+                if (currentControlAsLabel == null)
                 {
                     continue;
                 }
 
-                randomNumber = random.Next(0, icoooos.Count);
-                label.Text = icoooos[randomNumber];
+                int randomNumber = random.Next(0, _currentSessionSzoparElemek.Count);
+                currentControlAsLabel.Text = _currentSessionSzoparElemek[randomNumber];
 
-                icoooos.RemoveAt(randomNumber);
-
+                _currentSessionSzoparElemek.RemoveAt(randomNumber);
             }
-
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Stop();
 
-            elsoKlikk.BackColor = Color.FromArgb(153, 92, 0);
-            masodikKlikk.BackColor = Color.FromArgb(153, 92, 0);
-            elsoKlikk = null;
-            masodikKlikk = null;
+            firstlyClickedLabel.BackColor = _darkOrangeBackgroundColor;
+            secondlyClickedLabel.BackColor = _darkOrangeBackgroundColor;
+            firstlyClickedLabel = null;
+            secondlyClickedLabel = null;
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            FoMenu f2 = new FoMenu();
-            this.Close();
-            f2.Show();
+            new FoMenu().Show();
+
+            Hide();
         }
+
+        private void ModifyLabelVisibility(bool shouldBeVisible)
+        {
+            label1.Visible = shouldBeVisible;
+            label2.Visible = shouldBeVisible;
+            label3.Visible = shouldBeVisible;
+            label4.Visible = shouldBeVisible;
+            label5.Visible = shouldBeVisible;
+            label6.Visible = shouldBeVisible;
+            label7.Visible = shouldBeVisible;
+            label8.Visible = shouldBeVisible;
+            label9.Visible = shouldBeVisible;
+            label10.Visible = shouldBeVisible;
+            label11.Visible = shouldBeVisible;
+            label12.Visible = shouldBeVisible;
+            label13.Visible = shouldBeVisible;
+            label14.Visible = shouldBeVisible;
+            label15.Visible = shouldBeVisible;
+            label16.Visible = shouldBeVisible;
+            label17.Visible = shouldBeVisible;
+            label18.Visible = shouldBeVisible;
+            label19.Visible = shouldBeVisible;
+            label20.Visible = shouldBeVisible;
+        }
+
+        private bool IsSameColor(Color c1, Color c2) => c1.R == c2.R && c1.G == c2.G && c1.B == c2.B;
     }
 }

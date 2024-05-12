@@ -475,7 +475,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Memoria_Jatek";
             this.Text = "Mini Játék";
-            this.Load += new System.EventHandler(this.Memoria_Jatek_Load);
+            this.Load += new System.EventHandler(this.Memoriajatek_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

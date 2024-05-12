@@ -31,7 +31,6 @@ namespace SzoTanuloProgram
                 MessageBox.Show($"Váratlan hiba történt! {Environment.NewLine} " +
                                 $"{ex.Message}");
             }
-
         }
 
         /// <returns>
