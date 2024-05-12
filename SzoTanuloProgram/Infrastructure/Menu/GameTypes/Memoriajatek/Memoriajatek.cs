@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -13,28 +14,30 @@ namespace SzoTanuloProgram
         private int _foundPairsInCurrentSession = 0;
         private int _createdPairsInAllSession = 1;
         private Random random = new Random();
+        private bool _hasAlertBeenSent;
 
         private struct Szopar
         {
             public string AngolKifejezes;
             public string MagyarKifejezes;
+            public int UniqueId;
 
-            public Szopar(string angol, string magyar)
+            public Szopar(string angol, string magyar, int uid)
             {
                 AngolKifejezes = angol;
                 MagyarKifejezes = magyar;
+                UniqueId = uid;
             }
         }
 
-        //angol - magyar
         private List<Szopar> _osszesSzo = new List<Szopar>();
 
-        private List<int> _letrehozottSzavakIndexei = new List<int>();
+        private List<int> _createdSzoparIndexes = new List<int>();
         private List<string> _currentSessionSzoparElemek = new List<string>();
         private Label firstlyClickedLabel, secondlyClickedLabel;
 
+        private static readonly Color _mainBackgroundColor = Color.FromArgb(46, 51, 73);
         private static readonly Color _greyBackgroundColor = Color.FromArgb(140, 140, 140);
-        private static readonly Color _cyanBackgroundColor = Color.FromArgb(0, 179, 179);
         private static readonly Color _redBackgroundColor = Color.FromArgb(153, 0, 0);
         private static readonly Color _darkOrangeBackgroundColor = Color.FromArgb(153, 92, 0);
 
@@ -42,19 +45,23 @@ namespace SzoTanuloProgram
         {
             InitializeComponent();
 
-            ReadSzojegyzek();
+            LoadSzojegyzek();
             
             ModifyLabelVisibility(shouldBeVisible: false);
         }
 
-        private void ReadSzojegyzek()
+        private void LoadSzojegyzek()
         {
             StreamReader sr = new StreamReader(PorgetosEsBeirogatos_Almenu.ValasztottSzojegyzekFilePath);
+
+            var i = 0;
             while (!sr.EndOfStream)
             {
                 var currentLineSplitted = sr.ReadLine().Split('|');
 
-                _osszesSzo.Add(new Szopar(currentLineSplitted[0], currentLineSplitted[1]));
+                _osszesSzo.Add(new Szopar(currentLineSplitted[1], currentLineSplitted[0], i));
+
+                i++;
             }
         }
 
@@ -74,7 +81,7 @@ namespace SzoTanuloProgram
             }
 
             var clickedLabel = sender as Label;
-            if (clickedLabel == null)
+            if (clickedLabel == null || IsSameColor(clickedLabel.BackColor, _mainBackgroundColor))
             {
                 return;
             }
@@ -98,51 +105,32 @@ namespace SzoTanuloProgram
             secondlyClickedLabel = clickedLabel;
             secondlyClickedLabel.BackColor = _greyBackgroundColor;
 
-            //ELLENŐRZI A KÉT KLIKKET
-            string firstlyClickedLabelText = firstlyClickedLabel.Text;
-            int firstlyClickedLabelIndex = -10;
+            var szoparFromFirstlyClickedLabel = GetSzoparFromWord(firstlyClickedLabel.Text);
+            var szoparFromSecondlyClickedLabel = GetSzoparFromWord(secondlyClickedLabel.Text);
 
-            string masik = secondlyClickedLabel.Text;
-            int masikIndex = 0;
-            string angolSzo = "";
-
-            for (int i = 0; i < _osszesSzo.Count; i++)
+            if (szoparFromFirstlyClickedLabel.UniqueId == 0 || szoparFromSecondlyClickedLabel.UniqueId == 0)
             {
-                if (firstlyClickedLabelText == _osszesSzo[i].AngolKifejezes)
-                {
-                    firstlyClickedLabelIndex = i;
-                    angolSzo = firstlyClickedLabelText;
-                }
-
-                if (firstlyClickedLabelText == _osszesSzo[i].MagyarKifejezes)
-                {
-                    firstlyClickedLabelIndex = i;
-                }
-
-                if (masik == _osszesSzo[i].AngolKifejezes)
-                {
-                    masikIndex = i;
-                    angolSzo = masik;
-                }
-
-                if (masik == _osszesSzo[i].MagyarKifejezes)
-                {
-                    masikIndex = i;
-                }
+                return;
             }
 
-            if (firstlyClickedLabelIndex == masikIndex)
+            if (szoparFromFirstlyClickedLabel.UniqueId == szoparFromSecondlyClickedLabel.UniqueId)
             {
                 _foundPairsInCurrentSession++;
 
+                var angolSzo = szoparFromFirstlyClickedLabel.AngolKifejezes;
+
                 SpeechUtility.Speak(angolSzo);
 
-                Thread.Sleep(angolSzo.Length * 3);
+                Thread.Sleep(angolSzo.Length * 5);
 
-                firstlyClickedLabel.Visible = false;
+                firstlyClickedLabel.Text = string.Empty;
+                firstlyClickedLabel.BackColor = _mainBackgroundColor;
+                firstlyClickedLabel.IsAccessible = false;
                 firstlyClickedLabel = null;
 
-                secondlyClickedLabel.Visible = false;
+                secondlyClickedLabel.Text = string.Empty;
+                secondlyClickedLabel.BackColor = _mainBackgroundColor;
+                secondlyClickedLabel.IsAccessible = false;
                 secondlyClickedLabel = null;
 
                 Thread.Sleep(40);
@@ -169,9 +157,9 @@ namespace SzoTanuloProgram
 
             if (_createdPairsInAllSession > ((_osszesSzo.Count - (_osszesSzo.Count % 10)) / 10))
             {
-                MessageBox.Show($"Végeztél ezzel a leckével!" +
+                MessageBox.Show("Végeztél ezzel a leckével!" +
                     $"\nIsmételt szavak száma: {_osszesSzo.Count - (_osszesSzo.Count % 10)}" +
-                    $"\nAz OK gombra kattintva visszakerülsz a menübe!");
+                     "\nAz OK gombra kattintva visszakerülsz a menübe!");
 
                 new FoMenu().Show();
                 Hide();
@@ -205,10 +193,10 @@ namespace SzoTanuloProgram
                     int randomNumber = random.Next(0, _osszesSzo.Count);
 
                     bool volte = _currentSessionSzoparElemek.Contains(_osszesSzo[randomNumber].AngolKifejezes);
-                    bool volteIndex = _letrehozottSzavakIndexei.Contains(randomNumber);
+                    bool volteIndex = _createdSzoparIndexes.Contains(randomNumber);
                     if (!volte && !volteIndex)
                     {
-                        _letrehozottSzavakIndexei.Add(randomNumber);
+                        _createdSzoparIndexes.Add(randomNumber);
                         _currentSessionSzoparElemek.Add(_osszesSzo[randomNumber].AngolKifejezes);
                         _currentSessionSzoparElemek.Add(_osszesSzo[randomNumber].MagyarKifejezes);
                     }
@@ -253,6 +241,17 @@ namespace SzoTanuloProgram
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
+            if (_foundPairsInCurrentSession > 0 && !_hasAlertBeenSent)
+            {
+                MessageBox.Show($"Figyelem! {Environment.NewLine}" +
+                                $"Még nem fejezted be a párosítást. " +
+                                    $"Kérlek, nyomj újra a 'Menü' gombra, ha tényleg vissza szeretnél lépni a főmenübe!");
+
+                _hasAlertBeenSent = true;
+
+                return;
+            }
+
             new FoMenu().Show();
 
             Hide();
@@ -283,5 +282,20 @@ namespace SzoTanuloProgram
         }
 
         private bool IsSameColor(Color c1, Color c2) => c1.R == c2.R && c1.G == c2.G && c1.B == c2.B;
+
+        private Szopar GetSzoparFromWord(string word)
+        {
+            var trimmedWord = word.Trim();
+
+            var szoparIfItIsAnEnglishPhrase = _osszesSzo.FirstOrDefault(szp => szp.AngolKifejezes.Trim() == trimmedWord);
+
+            //ha angol kifejezés és sikerült megtalálni az alapján a szópárat
+            if (szoparIfItIsAnEnglishPhrase.UniqueId != 0)
+            {
+                return szoparIfItIsAnEnglishPhrase;
+            }
+
+            return _osszesSzo.FirstOrDefault(szp => szp.MagyarKifejezes.Trim() == trimmedWord);
+        }
     }
 }
