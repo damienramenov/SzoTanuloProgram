@@ -1,0 +1,130 @@
+﻿Africa|Afrika
+African|afrikai
+American|amerikai
+Argentina|Argentína
+Argentinian|argentin
+Asia|Ázsia
+Asian|ázsiai
+Australia|Ausztrália
+Australian|ausztrál
+Brazil|Brazília
+Brazilian|brazil
+China|Kína
+Chinese|kínai
+Czech|cseh
+the|a/az
+Egypt|Egyiptom
+Egyptian|egyiptomi|
+England|Anglia
+English|angol
+Europe|Európa
+European|európai
+France|Franciaország
+French|francia
+German|német
+Germany|Németország
+Hungarian|magyar
+Hungary|Magyarország
+Ireland|Írország
+Irish|ír
+Italian|olasz
+Italy|Olaszország
+Japan|Japán
+Japanese|japán
+Mexican|mexikói
+Mexico|Mexikó
+North America|Észak-Amerika
+North American|észak-amerikai
+Poland|Lengyelország
+Polish|lengyel
+Russia|Oroszország
+Russian|orosz
+Scotland|Skócia
+Scottish|skót
+South|Dél
+South American|dél-amerikai
+Spain|Spanyolország
+Spanish|spanyol
+Swiss|svájci
+Switzerland|Svájc
+Turkey|Törökország
+Turkish|török
+the) States / the US(A)|(Amerikai) Egyesült Államok / USA
+Answer the questions.|Válaszolják meg a kérdéseket.
+Can I have a copy, please?|Kaphatnék egy példányt, kérem?
+Can you help me, please?|Tudna segíteni nekem, kérem?
+Close the door.|Csukja be az ajtót.
+Do exercise a.|Végezzék el az a. feladatot.
+Excuse me, what’s...in English?|Elnézést, hogyan mondják angolul azt, hogy…?
+Go to page 84.|Lapozzanak a 84. oldalra.
+How do you spell it?|Hogyan betűzik?
+I don’t know.|Nem tudom.
+I don’t understand.|Nem értem.
+Listen and repeat.|Hallgassák meg (figyeljenek) és ismételjék meg.
+Look at the board.|Nézzenek a táblára.
+Open your books, please.|Nyissák ki a könyvüket, kérem.
+Please stop talking!|Kérem, hagyják abba a beszélgetést!
+Read the text.|Olvassák el a szöveget.
+Sit down.|Üljön le. / Üljenek le.
+Sorry I’m late.|Elnézést kérek, hogy elkéstem.
+Sorry, can you repeat that, please?|Elnézést, megismételné ezt, kérem?
+Stand up.|Álljon fel.
+Turn off your mobile.|Kapcsolják ki a mobiltelefonjukat.
+What page is it?|Melyik oldalon van?
+Work in pairs / groups.|Dolgozzanak párokban / csoportokban.
+bike|bicikli
+board|tábla
+cat|macska
+chair|szék
+computer|számítógép
+desk|íróasztal
+door|ajtó
+Good afternoon|Sir. Jó napot (kívánok)
+Good evening|Jó estét (kívánok)
+Good morning|Jó reggelt (kívánok)
+Good night|Jó éjszakát (kívánok)
+I think it’s...|Azt hiszem…
+I’m not sure|Nem vagyok biztos benne
+name|név
+table|asztal
+thanks|köszönet, köszönöm
+this|ez
+train|vonat
+tree|fa
+weekday|hétköznap
+weekend|hétvége
+well|jól
+window|ablak
+Would you like...?|Szeretne…? Kér…?
+address|cím
+age|kor
+airport|repülőtér
+answer|válaszol
+bar|bár
+basketball|kosárlabda
+boot|csizma
+car|autó
+chess|sakk
+city|város
+class|tanóra
+close|(be)zár
+country|ország
+double room|kétágyas szoba
+email|e-mail
+first name|keresztnév, utónév
+ground floor|földszint
+hotel|hotel
+internet|internet
+jazz|jazz
+lift|lift
+phone|telefon
+phone number|telefonszám
+picture|kép
+postcode|irányítószám
+reception|recepció, porta
+salad|saláta
+school|iskola
+single room|egyágyas szoba
+surname|vezetéknév
+taxi|taxi
+tennis|tenisz
