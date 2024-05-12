@@ -33,11 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    <Reference Include="DarrenLee.SpeechSynthesis, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\AngolSzoTanuloProgi\AngolSzoTanuloProgi\bin\Debug\DarrenLee.SpeechSynthesis.dll</HintPath>
     </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
@@ -51,106 +51,100 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\Menu\GameType.cs" />
-    <Compile Include="Infrastructure\Resources\ImageType.cs" />
-    <Compile Include="Infrastructure\Menu\GameTypes\Beirogatos\Beirogatos.cs">
+    <Compile Include="Beirogatos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Beirogatos\Beirogatos.Designer.cs">
+    <Compile Include="Beirogatos.Designer.cs">
       <DependentUpon>Beirogatos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\FeleletValasztos_Almenu.cs">
+    <Compile Include="FeleletValasztosMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\FeleletValasztos_Almenu.Designer.cs">
-      <DependentUpon>FeleletValasztos_Almenu.cs</DependentUpon>
+    <Compile Include="FeleletValasztosMenu.Designer.cs">
+      <DependentUpon>FeleletValasztosMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_Osszes.cs">
+    <Compile Include="FeleletValasztos_Osszes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_Osszes.Designer.cs">
-      <DependentUpon>Feleletvalasztos_Osszes.cs</DependentUpon>
+    <Compile Include="FeleletValasztos_Osszes.Designer.cs">
+      <DependentUpon>FeleletValasztos_Osszes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_TeljesSzoJegyzek.cs">
+    <Compile Include="FeleletValasztos_TeljesSzoJegyzek.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_TeljesSzoJegyzek.Designer.cs">
-      <DependentUpon>Feleletvalasztos_TeljesSzoJegyzek.cs</DependentUpon>
+    <Compile Include="FeleletValasztos_TeljesSzoJegyzek.Designer.cs">
+      <DependentUpon>FeleletValasztos_TeljesSzoJegyzek.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\FoMenu.cs">
+    <Compile Include="FoMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\FoMenu.Designer.cs">
+    <Compile Include="FoMenu.Designer.cs">
       <DependentUpon>FoMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Loader\LoaderGUI.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Loader\LoaderGUI.Designer.cs">
-      <DependentUpon>LoaderGUI.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Memoriajatek\Memoriajatek.cs">
+    <Compile Include="Memoria_Jatek.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Memoriajatek\Memoriajatek.Designer.cs">
-      <DependentUpon>Memoriajatek.cs</DependentUpon>
+    <Compile Include="Memoria_Jatek.Designer.cs">
+      <DependentUpon>Memoria_Jatek.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Resources\SzojegyzekType.cs" />
-    <Compile Include="Infrastructure\Utilities\EnumHelper.cs" />
-    <Compile Include="MainProgram.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_JatekGUI.cs">
+    <Compile Include="Quiz.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_JatekGUI.Designer.cs">
-      <DependentUpon>Feleletvalasztos_JatekGUI.cs</DependentUpon>
+    <Compile Include="Quiz.Designer.cs">
+      <DependentUpon>Quiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Porgetos\Szavak_Angol_Magyar_Porgetos.cs">
+    <Compile Include="Szavak_Angol_Magyar_Porgetos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Porgetos\Szavak_Angol_Magyar_Porgetos.Designer.cs">
+    <Compile Include="Szavak_Angol_Magyar_Porgetos.Designer.cs">
       <DependentUpon>Szavak_Angol_Magyar_Porgetos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Porgetos\Szavak_Magyar_Angol_Porgetos.cs">
+    <Compile Include="Szavak_Magyar_Angol_Porgetos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Porgetos\Szavak_Magyar_Angol_Porgetos.Designer.cs">
+    <Compile Include="Szavak_Magyar_Angol_Porgetos.Designer.cs">
       <DependentUpon>Szavak_Magyar_Angol_Porgetos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\PorgetosEsBeirogatos_Almenu.cs">
+    <Compile Include="ProgetosEsBeirogatos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\PorgetosEsBeirogatos_Almenu.Designer.cs">
-      <DependentUpon>PorgetosEsBeirogatos_Almenu.cs</DependentUpon>
+    <Compile Include="ProgetosEsBeirogatos.Designer.cs">
+      <DependentUpon>ProgetosEsBeirogatos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Beirogatos\_beirogatosPorgetosVege.cs">
+    <Compile Include="_beirogatosPorgetosVege.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Menu\GameTypes\Beirogatos\_beirogatosPorgetosVege.Designer.cs">
+    <Compile Include="_beirogatosPorgetosVege.Designer.cs">
       <DependentUpon>_beirogatosPorgetosVege.cs</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Utilities\FileService.cs" />
-    <Compile Include="Infrastructure\Utilities\SpeechUtility.cs" />
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\Beirogatos\Beirogatos.resx">
+    <EmbeddedResource Include="Beirogatos.resx">
       <DependentUpon>Beirogatos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\FeleletValasztos_Almenu.resx">
-      <DependentUpon>FeleletValasztos_Almenu.cs</DependentUpon>
+    <EmbeddedResource Include="FeleletValasztosMenu.resx">
+      <DependentUpon>FeleletValasztosMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_Osszes.resx">
-      <DependentUpon>Feleletvalasztos_Osszes.cs</DependentUpon>
+    <EmbeddedResource Include="FeleletValasztos_Osszes.resx">
+      <DependentUpon>FeleletValasztos_Osszes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_TeljesSzoJegyzek.resx">
-      <DependentUpon>Feleletvalasztos_TeljesSzoJegyzek.cs</DependentUpon>
+    <EmbeddedResource Include="FeleletValasztos_TeljesSzoJegyzek.resx">
+      <DependentUpon>FeleletValasztos_TeljesSzoJegyzek.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\FoMenu.resx">
+    <EmbeddedResource Include="FoMenu.resx">
       <DependentUpon>FoMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Loader\LoaderGUI.resx">
-      <DependentUpon>LoaderGUI.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\Memoriajatek\Memoriajatek.resx">
-      <DependentUpon>Memoriajatek.cs</DependentUpon>
+    <EmbeddedResource Include="Memoria_Jatek.resx">
+      <DependentUpon>Memoria_Jatek.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -161,22 +155,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\PorgetosEsBeirogatos_Almenu.resx">
-      <DependentUpon>PorgetosEsBeirogatos_Almenu.cs</DependentUpon>
+    <EmbeddedResource Include="ProgetosEsBeirogatos.resx">
+      <DependentUpon>ProgetosEsBeirogatos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\Feleletvalasztos\Feleletvalasztos_JatekGUI.resx">
-      <DependentUpon>Feleletvalasztos_JatekGUI.cs</DependentUpon>
+    <EmbeddedResource Include="Quiz.resx">
+      <DependentUpon>Quiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\Porgetos\Szavak_Angol_Magyar_Porgetos.resx">
+    <EmbeddedResource Include="Szavak_Angol_Magyar_Porgetos.resx">
       <DependentUpon>Szavak_Angol_Magyar_Porgetos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\Porgetos\Szavak_Magyar_Angol_Porgetos.resx">
+    <EmbeddedResource Include="Szavak_Magyar_Angol_Porgetos.resx">
       <DependentUpon>Szavak_Magyar_Angol_Porgetos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Menu\GameTypes\Beirogatos\_beirogatosPorgetosVege.resx">
+    <EmbeddedResource Include="_beirogatosPorgetosVege.resx">
       <DependentUpon>_beirogatosPorgetosVege.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -192,237 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Infrastructure\Resources\Images\Flags\english_flag.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Flags\hun_flag.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Flags\minijatek.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Loader\0.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Loader\1.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Loader\2.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Loader\3.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Loader\4.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Loader\5.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Loader\6.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Loader\7.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Misc\questionmark.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Images\Misc\sound.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Egyeb\Elementary_1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_10.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_11.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_12.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_13.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_14.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_15.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_3.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_4.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_5.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_6.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_7.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_8.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Elementary\Elementary_9.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_10.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_11.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_12.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_13.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_14.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_15.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_3.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_4.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_5.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_6.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_7.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_8.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Intermediate\Intermediate_9.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_10.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_11.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_12.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_13.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_14.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_15.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_3.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_4.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_5.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_6.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_7.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_8.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\PreIntermediate\PreIntermediate_9.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_10.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_11.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_12.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_13.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_14.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_15.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_16.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_17.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_18.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_3.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_4.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_5.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_6.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_7.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_8.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Infrastructure\Resources\Szojegyzekek\Proficiency\Proficiency_9.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
