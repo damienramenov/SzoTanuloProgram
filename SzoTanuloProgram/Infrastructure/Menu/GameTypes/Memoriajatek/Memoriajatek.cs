@@ -241,7 +241,7 @@ namespace SzoTanuloProgram
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            if (_foundPairsInCurrentSession > 0 && !_hasAlertBeenSent)
+            if ((_foundPairsInCurrentSession > 0 || _createdPairsInAllSession > 10) && !_hasAlertBeenSent)
             {
                 MessageBox.Show($"Figyelem! {Environment.NewLine}" +
                                 $"Még nem fejezted be a párosítást. " +
